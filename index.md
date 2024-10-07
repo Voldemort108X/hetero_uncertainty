@@ -128,7 +128,7 @@ src="http://b5tcdn.bang5mai.com/js/flag.js?v=156945351"></script>
         <a href="https://medicine.yale.edu/bioimaging/ipa/">Yale University</a>&nbsp;&nbsp;&nbsp;
         <a href="https://tea.ece.ubc.ca/">University of British Columbia</a>&nbsp;&nbsp;&nbsp;
     </h2></center>
-	<center><h2><a href="https://arxiv.org/abs/2312.00836">Paper</a> | <a href="https://github.com/Voldemort108X/hetero_uncertainty">Code coming soon</a> </h2></center>
+	<center><h2><a href="https://arxiv.org/abs/2312.00836">Paper</a> | <a href="./assets/MICCAI 2024 Poster.pdf">Poster</a> | <a href="https://github.com/Voldemort108X/hetero_uncertainty">Code coming soon</a> </h2></center>
 <br>
 
 
@@ -259,14 +259,15 @@ src="http://b5tcdn.bang5mai.com/js/flag.js?v=156945351"></script>
 <br>
 
 
+
 <hr>
 <!-- <table align=center width=800px> <tr> <td> <left> -->
-<center><h1>Citation</h1></center>
-<table align=center width=800px>
-              <tr>
-                  <td>
-                  <left>
-<pre><code style="display:block; overflow-x: auto">
+<h1 style="text-align: center;">Citation</h1>
+<table align="center" style="max-width: 100%; width: auto;">
+  <tr>
+    <td>
+      <pre style="white-space: pre-wrap; word-wrap: break-word;">
+<code>
 @misc{zhang_heteroscedastic_2023,
 	title = {Heteroscedastic {Uncertainty} {Estimation} for {Probabilistic} {Unsupervised} {Registration} of {Noisy} {Medical} {Images}},
 	url = {http://arxiv.org/abs/2312.00836},
@@ -275,9 +276,11 @@ src="http://b5tcdn.bang5mai.com/js/flag.js?v=156945351"></script>
 	year = {2023},
 	note = {arXiv:2312.00836 [cs, eess]}
 }
-</code></pre>
-</left></td></tr></table>
-
+</code>
+      </pre>
+    </td>
+  </tr>
+</table>
 
 
 
