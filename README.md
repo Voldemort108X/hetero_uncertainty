@@ -49,7 +49,7 @@ Please download ACDC dataset [[website]](https://www.creatis.insa-lyon.fr/Challe
     
 *   `--motion-loss-type`: Defines the type of motion loss used during training. `'wmse'` indicates a weighted mean squared error loss.
     
-*   `--variance-loss-type 'beta-NLL'`: Specifies the type of variance-related loss. `'beta-NLL'` refers to a beta-weighted negative log-likelihood loss.
+*   `--variance-loss-type`: Specifies the type of variance-related loss. `'beta-NLL'` refers to a beta-weighted negative log-likelihood loss.
     
 *   `--batch-size`: Batch size.
     
@@ -90,9 +90,11 @@ Please download ACDC dataset [[website]](https://www.creatis.insa-lyon.fr/Challe
 
 ## Metrics
 ### Contour-based metric
+We evaluated our approach using a contour-based metric by warping the ED (end-diastolic) myocardium segmentation with the estimated displacement to reconstruct the ES (end-systolic) segmentation. The reconstructed ES segmentation was then compared with the ground truth ES segmentation provided by the dataset. It is important to note that no segmentation labels were used during training. The quantitative results were reproduced by running inference with the pre-trained weights, as demonstrated in [evaluation.ipynb](/evaluation.ipynb).
+
 
 ### Uncertainty quantification
-
+To quantitatively assess our estimated heteroscedastic uncertainty for non-uniform noise, we utilized sparsification error metrics and computed the area under the sparsification error curve. Detailed explanations and results can be found in [evaluation.ipynb](/evaluation.ipynb).
 
 ## Citation
 ```
