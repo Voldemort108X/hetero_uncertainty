@@ -84,7 +84,7 @@ parser.add_argument('--wandb-name', type=str, default=None, help='name of wandb 
 parser.add_argument('--wandb-project', type=str, default=None, help='name of wandb project (optional)')
 
 # flags for ablation experiments
-parser.add_argument('--warm_start', action='store_true', help='warm start the network by first training 10 epochs for motion esimator and then 10 epochs for covis estimator')
+parser.add_argument('--warm_start', action='store_true', help='warm start the network by first training x epochs for motion esimator and then x epochs for variance estimator')
 parser.add_argument('--flag_laplace', action='store_true', help='Default is false, whether to use Laplacian assumption for noise')
 
 args = parser.parse_args()
@@ -96,11 +96,7 @@ def adjust_learning_rate(optimizer, epoch, MAX_EPOCHES, INIT_LR, power=0.9):
     for param_group in optimizer.param_groups:
         param_group['lr'] = round(INIT_LR * np.power( 1 - (epoch) / MAX_EPOCHES ,power),8)
 
-# load and prepare training data
-# train_files = vxm.py.utils.read_file_list(args.img_list, prefix=args.img_prefix,
-#                                           suffix=args.img_suffix)
 
-# train_files = glob.glob('../../Dataset/Echo/train/*.mat') + glob.glob('../../Dataset/Echo/val/*.mat')
 assert args.dataset in ['Echo', 'CAMUS', 'ACDC']
 print(os.listdir('../../'))
 train_files = glob.glob(os.path.join('../../Dataset/', args.dataset, 'train/*.mat')) + glob.glob(os.path.join('../../Dataset', args.dataset, 'val/*.mat'))
@@ -111,22 +107,11 @@ assert len(train_files) > 0, 'Could not find any training data.'
 # no need to append an extra feature axis if data is multichannel
 add_feat_axis = not args.multichannel
 
-# if args.atlas:
-#     # scan-to-atlas generator
-#     atlas = vxm.py.utils.load_volfile(args.atlas, np_var='vol',
-#                                       add_batch_axis=True, add_feat_axis=add_feat_axis)
-#     generator = vxm.generators.scan_to_atlas(train_files, atlas,
-#                                              batch_size=args.batch_size, bidir=args.bidir,
-#                                              add_feat_axis=add_feat_axis)
-# else:
-    # scan-to-scan generator
 
 # compute the real batch size needed
 reduced_batch_size = int(args.batch_size / args.accumulation_steps)
 
-# if args.dataset == 'Clinical_echo':
-#     generator = vxm.generators_clinical_echo.scan_to_scan_clinical_echo(
-#         train_files, batch_size=args.batch_size, bidir=args.bidir, add_feat_axis=add_feat_axis)
+
 if args.dataset == 'Echo':
     generator = tsm.generators_echo.scan_to_scan_echo(
         train_files, batch_size=reduced_batch_size, bidir=args.bidir, add_feat_axis=add_feat_axis)
@@ -268,7 +253,7 @@ if args.use_wandb:
 # training loops
 for epoch in range(args.initial_epoch, args.epochs):
 
-    # warm start flags for motion and covis 
+    # warm start flags for motion and variance 
     if args.warm_start == True:
         if epoch < warm_start_epoch:
             flag_motion = True

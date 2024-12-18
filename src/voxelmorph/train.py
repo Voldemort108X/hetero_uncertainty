@@ -94,11 +94,6 @@ args = parser.parse_args()
 
 bidir = args.bidir
 
-# load and prepare training data
-# train_files = vxm.py.utils.read_file_list(args.img_list, prefix=args.img_prefix,
-#                                           suffix=args.img_suffix)
-
-# train_files = glob.glob('../../Dataset/Echo/train/*.mat') + glob.glob('../../Dataset/Echo/val/*.mat')
 assert args.dataset in ['Echo', 'CAMUS', 'ACDC']
 print(os.listdir('../../'))
 train_files = glob.glob(os.path.join('../../Dataset/', args.dataset, 'train/*.mat')) + glob.glob(os.path.join('../../Dataset', args.dataset, 'val/*.mat'))
@@ -246,7 +241,7 @@ if args.use_wandb:
 # training loops
 for epoch in range(args.initial_epoch, args.epochs):
 
-    # warm start flags for motion and covis 
+    # warm start flags for motion and variance 
     if args.warm_start == True:
         if epoch < warm_start_epoch:
             flag_motion = True
@@ -302,8 +297,6 @@ for epoch in range(args.initial_epoch, args.epochs):
             motion_loss_list = []
 
             image_weight_vis = [] # check the visual of image_weight
-            # weight_sigma_vis = [] # check the visual of weight_sigma
-            # weight_I_vis = [] # check the visual of weight_I
             for n, loss_function in enumerate(losses_motion):
 
                 # when computing the data term for the motion loss, use the predicted variance
@@ -417,8 +410,6 @@ for epoch in range(args.initial_epoch, args.epochs):
             logsigma_image_fwd = wandb.Image(logsigma_image_vis[0].cpu().detach().numpy()[0, 0][:, :, z_idx])
             image_weight_fwd = wandb.Image(image_weight_vis[0].cpu().detach().numpy()[0, 0][:, :, z_idx])
 
-            # weight_sigma_fwd = wandb.Image(weight_sigma_vis[0].cpu().detach().numpy()[0, 0][:, :, z_idx])
-            # weight_I_fwd = wandb.Image(weight_I_vis[0].cpu().detach().numpy()[0, 0][:, :, z_idx])
 
             variance_image_fwd = wandb.Image(np.multiply(np.exp(logsigma_image_vis[0].cpu().detach().numpy()[0, 0]), y_pred[-1].cpu().detach().numpy()[0, 0])[:, :, z_idx])
             
@@ -427,8 +418,6 @@ for epoch in range(args.initial_epoch, args.epochs):
                 logsigma_image_bwd = wandb.Image(logsigma_image_vis[1].cpu().detach().numpy()[0, 0][:, :, z_idx])
                 image_weight_bwd = wandb.Image(image_weight_vis[1].cpu().detach().numpy()[0, 0][:, :, z_idx])
 
-                # weight_sigma_bwd = wandb.Image(weight_sigma_vis[1].cpu().detach().numpy()[0, 0][:, :, z_idx])
-                # weight_I_bwd = wandb.Image(weight_I_vis[1].cpu().detach().numpy()[0, 0][:, :, z_idx])
 
                 variance_image_bwd = np.multiply(np.exp(logsigma_image_vis[1].cpu().detach().numpy()[0, 0]), y_pred[-1].cpu().detach().numpy()[0, 0])
                 # print(variance_image_bwd.shape)
@@ -455,9 +444,6 @@ for epoch in range(args.initial_epoch, args.epochs):
                 pred_src = wandb.Image(y_pred[1].cpu().detach().numpy()[0, 0,])
                 logsigma_image_bwd = wandb.Image(logsigma_image_vis[1].cpu().detach().numpy()[0, 0])
                 image_weight_bwd = wandb.Image(image_weight_vis[1].cpu().detach().numpy()[0, 0])
-
-                # weight_sigma_bwd = wandb.Image(weight_sigma_vis[1].cpu().detach().numpy()[0, 0])
-                # weight_I_bwd = wandb.Image(weight_I_vis[1].cpu().detach().numpy()[0, 0])
 
                 variance_image_bwd = wandb.Image(np.multiply(np.exp(logsigma_image_vis[1].cpu().detach().numpy()[0, 0]), y_pred[-1].cpu().detach().numpy()[0, 0]))
 
