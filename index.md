@@ -128,7 +128,7 @@ src="http://b5tcdn.bang5mai.com/js/flag.js?v=156945351"></script>
         <a href="https://medicine.yale.edu/bioimaging/ipa/">Yale University</a>&nbsp;&nbsp;&nbsp;
         <a href="https://tea.ece.ubc.ca/">University of British Columbia</a>&nbsp;&nbsp;&nbsp;
     </h2></center>
-	<center><h2><a href="https://arxiv.org/abs/2312.00836">Paper</a> | <a href="./assets/MICCAI 2024 Poster.pdf">Poster</a> | <a href="https://github.com/Voldemort108X/hetero_uncertainty">Code coming soon</a> </h2></center>
+	<center><h2><a href="https://arxiv.org/abs/2312.00836">Paper</a> | <a href="./assets/MICCAI 2024 Poster.pdf">Poster</a> | <a href="https://github.com/Voldemort108X/hetero_uncertainty">Code</a> </h2></center>
 <br>
 
 
@@ -241,22 +241,6 @@ src="http://b5tcdn.bang5mai.com/js/flag.js?v=156945351"></script>
 <br>
 
 
-<hr>
-<h1 align="center">Incorporating displacement uncertainty</h1>
-<!-- <h2 align="center">Learned Geometric Knowledge</h2> -->
-<table border="0" cellspacing="10" cellpadding="0" align="center">
-  <td align="center" valign="middle">
-      <a href="./assets/ACDC_sigmaZ-1.png"> <img
-		src="./assets/ACDC_sigmaZ-1.png" style="width:100%;"> </a>
-  </td>
-</table>
-<table align=center width=800px>
-                <tr>
-                    <td>
-  <p align="justify" width="20%">
-  Estimated $\hat{\sigma}_z^2$ of our proposed method framework under Voxelmorph architecture \cite{balakrishnan_voxelmorph_2019} compared with Voxelmorph-diff \cite{dalca_unsupervised_2019}. The second column shows the warped images of both methods using the displacement predicted. We overlay our predicted $\sigma_z^2$ on estimated displacement $z$ in the third column where red indicates higher uncertainty and blue indicates lower. Our estimated $\sigma_z^2$ is able to capture the randomness more accurately in $z$ together with a better registration performance than Voxelmorph-diff when comparing the second column to the fixed image due to our proposed adaptive signal-to-noise weighting strategy.
-</p></td></tr></table>
-<br>
 
 
 
@@ -268,13 +252,13 @@ src="http://b5tcdn.bang5mai.com/js/flag.js?v=156945351"></script>
     <td>
       <pre style="white-space: pre-wrap; word-wrap: break-word;">
 <code>
-@misc{zhang_heteroscedastic_2023,
-	title = {Heteroscedastic {Uncertainty} {Estimation} for {Probabilistic} {Unsupervised} {Registration} of {Noisy} {Medical} {Images}},
-	url = {http://arxiv.org/abs/2312.00836},
-	publisher = {arXiv},
-	author = {Zhang, Xiaoran and Pak, Daniel H. and Ahn, Shawn S. and Li, Xiaoxiao and You, Chenyu and Staib, Lawrence and Sinusas, Albert J. and Wong, Alex and Duncan, James S.},
-	year = {2023},
-	note = {arXiv:2312.00836 [cs, eess]}
+@inproceedings{zhang2024heteroscedastic,
+  title={Heteroscedastic Uncertainty Estimation Framework for Unsupervised Registration},
+  author={Zhang, Xiaoran and Pak, Daniel H and Ahn, Shawn S and Li, Xiaoxiao and You, Chenyu and Staib, Lawrence H and Sinusas, Albert J and Wong, Alex and Duncan, James S},
+  booktitle={International Conference on Medical Image Computing and Computer-Assisted Intervention},
+  pages={651--661},
+  year={2024},
+  organization={Springer}
 }
 </code>
       </pre>
